@@ -1,0 +1,24 @@
+path: /content/datasets/ws          # Path to the YOLO dataset
+train: train/images                 # Training images directory
+val: val/images                     # Validation images directory
+test: test/images                   # test images (optional)
+nc: 5 # number of classes (update this based on your dataset)
+
+# Classes
+names: ['Arborio', 'Basmati', 'Ipsala', 'Jasmine', 'Karacadag']
+
+# Classes
+# 0: Arborio
+# 1: Basmati
+# 2: Ipsala
+# 3: Jasmine
+# 4: Karacadag
+
+
+# model: yolo11n.pt
+# weights: runs/detect/train/weights/best.pt
+# batch_size: 16
+# epochs: 2
+# imgsz: 640
+# lr0: 0.01
+# optimizer: auto

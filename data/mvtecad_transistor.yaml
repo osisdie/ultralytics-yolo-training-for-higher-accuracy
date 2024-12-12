@@ -1,0 +1,20 @@
+
+train: transistor/train/images  # Training images directory
+val: transistor/val/images      # Validation images directory
+
+nc: 5                           # Number of classes
+names: ['good', 'bent_lead', 'cut_lead', 'damaged_case', 'misplaced']
+
+# Classes
+# 0: good
+# 1: bent_lead
+# 2: cut_lead
+# 3: damaged_case
+# 4: misplaced
+
+# weights: runs/detect/train/weights/best.pt
+# batch_size: 16
+# epochs: 10
+# imgsz: 640
+# lr0: 0.01
+# optimizer: auto
