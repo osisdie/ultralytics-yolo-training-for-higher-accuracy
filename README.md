@@ -110,7 +110,6 @@ class_map = dict(
 ![](./images/rice/rice_prediction.png)
 
 
-
 # Current Cross-model-parameter training results
 **metrics/mAP50**
 ![](./images/yolo11_metrics_mAP50_for_bottle_50_epochs_each.png)
@@ -118,11 +117,12 @@ class_map = dict(
 **val/cls_loss**
 ![](./images/yolo11_val_cls_loss_for_bottle_50_epochs_each.png)
 
-**prediction**
+
+# Prediction
 
 ***The best mAP50 accuracy is***
+<small>-> Try model here [best.pt](./models/bottle/Run8_yolo11n_512_SGD_Aug/best.pt)</small>
 
-**Try model here [best.pt](./models/bottle/Run8_yolo11n_512_SGD_Aug/best.pt)
 ```yaml
 - run8: Run8_yolo11n_512_SGD_Aug
 - accuracy: 0.98 mAP50
@@ -136,9 +136,7 @@ class_map = dict(
 ```
 
 
-***The lowest val/cls_loss is***
-
-**Try model here [best.pt](./models/bottle/Run7_yolo11n_512_SGD/best.pt)
+***The lowest val/cls_loss is*** -> Try model here [best.pt](./models/bottle/Run7_yolo11n_512_SGD/best.pt)
 ```yaml
 - run7: Run7_yolo11n_512_SGD
 - accuracy: 0.95 mAP50
@@ -151,16 +149,49 @@ class_map = dict(
 - yolo-model: yollo11n.pt
 ```
 
-# Conclusion
-- Partially meet the goal, that found out some parameter combination can meet the accuracy 95%+ from the following best runs
-  - Run8_yolo11n_512_SGD_Aug (0.98 mAP50)
-  - Run7_yolo11n_512_SGD (0.96 mAP50)
-  - Run32_yolo11m_512_SGD_Aug (0.96 mAP50)
+# Manual Testing
 
-- `Missed` the goal on the loss value, every loss value within each run was higher than at least 20%, here are the top 3 lowest runs
-  - Run7_yolo11n_512_SGD (0.26 val/cls_loss)
-  - Run14_yolo11s_256_SGD_Aug (0.37 val/cls_loss)
-  - Run32_yolo11m_512_SGD_Aug (0.40 val/cls_loss)
+**bash command example**
+
+`Note`: please specifiy desired model path as the 1st argument and following by one or more testing image paths as  the rest arguments.
+
+```sh
+$ python bottle_console_app.py \
+  models/bottle/Run7_yolo11n_512_SGD/best.pt \
+  tests/bottle_input.png
+```
+
+**Output**
+```sh
+Processing image: tests/bottle_input.png
+
+image 1/1 ./tests/bottle_input.png: 512x512 1 contamination, 66.8ms
+Speed: 3.0ms preprocess, 66.8ms inference, 1.0ms postprocess per image at shape (1, 3, 512, 512)
+Result:
+Object 1:
+  Type:  3, Confidence: 0.95
+  Coordinates: x_min=0.003, y_min=0.008, x_max=0.999, y_max=0.997
+  Dimensions: width=0.996, height=0.989, Area=0.986
+
+Saved predicted result to ./output/bottle_input.png
+```
+
+**Figure**
+![](./tests/bottle_output_figure.png)
+
+
+# Conclusion
+> Experiments suggest that utilizing the `YOLOv11n` model with a `512`-pixel image size and the `SGD` learning algorithm can yield improved results. Furthermore, employing image augmentation techniques such as rotation, flipping, grayscale conversion, and brightness adjustment can further enhance accuracy.
+
+> While the goal of achieving `95%` `mAP50` was partially met, certain parameter combinations demonstrated promising results:
+> - Run8_`yolo11n_512_SGD_Aug` (`0.98` `mAP50`)
+> - Run7_yolo11n_512_SGD (0.96 mAP50)
+> - Run32_yolo11m_512_SGD_Aug (0.96 mAP50)
+
+> However, the goal of minimizing the loss value was not achieved. In every run, the loss value exceeded the target threshold by at least 20%. The top 3 runs with the lowest loss values were:
+> - Run7_`yolo11n_512_SGD` (`0.26` `val/cls_loss`)
+> - Run14_yolo11s_256_SGD_Aug (0.37 val/cls_loss)
+> - Run32_yolo11m_512_SGD_Aug (0.40 val/cls_loss)"
 
 
 # References
