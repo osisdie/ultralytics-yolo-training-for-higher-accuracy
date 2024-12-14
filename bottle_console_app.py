@@ -1,24 +1,25 @@
-import os
 import argparse
-import numpy as np
+import os
+
 import matplotlib.pyplot as plt
+import numpy as np
 from ultralytics import YOLO
 
 
 def load_model(model_path: str):
-    """Load the YOLO model."""
+    '''Load the YOLO model.'''
 
     return YOLO(model_path)
 
 
 def detect_objects(model, image_path: str):
-    """Detect objects in the image using the YOLO model."""
+    '''Detect objects in the image using the YOLO model.'''
 
     return model(image_path)
 
 
 def display_results(result):
-    """Display detailed prediction insights."""
+    '''Display detailed prediction insights.'''
 
     box_all = result.boxes
     for i, box in enumerate(box_all):
@@ -32,22 +33,36 @@ def display_results(result):
         height = y_max - y_min
         area = width * height
 
-        print(f"Object {i + 1}:")
-        print(f"  Type: {label:2d}, Confidence: {confidence:.2f}")
-        print(f"  Coordinates: x_min={x_min:.3f}, y_min={y_min:.3f}, x_max={x_max:.3f}, y_max={y_max:.3f}")
-        print(f"  Dimensions: width={width:.3f}, height={height:.3f}, Area={area:.3f}")
-        print("")
+        print(f'Object {i + 1}:')
+        print(
+            f'  Type: {label:2d}, '
+            f'Confidence: {confidence:.2f}'
+        )
+        print(
+            f'  Coordinates: '
+            f'x_min={x_min:.3f}, '
+            f'y_min={y_min:.3f}, '
+            f'x_max={x_max:.3f}, '
+            f'y_max={y_max:.3f}'
+        )
+        print(
+            f'  Dimensions: '
+            f'width={width:.3f}, '
+            f'height={height:.3f}, '
+            f'Area={area:.3f}'
+        )
+        print()
 
 
 def save_result(result, output_path: str):
-    """Save the result image."""
+    '''Save the result image.'''
 
     result.save(output_path)
-    print(f"Saved predicted result to {output_path}")
+    print(f'Saved predicted result to {output_path}')
 
 
 def show_result_with_matplotlib(result):
-    """Display the result image with bounding boxes using matplotlib."""
+    '''Display the result image with bounding boxes using matplotlib.'''
 
     # Get the image and boxes
     img = result.plot()  # Plot the image with bounding boxes
@@ -57,12 +72,12 @@ def show_result_with_matplotlib(result):
     plt.figure(figsize=(10, 10))
     plt.imshow(img)
     plt.axis('off')
-    plt.title("Object Detection Result")
+    plt.title('Object Detection Result')
     plt.show()
 
 
 def detect_and_display(model_path: str, image_paths: list):
-    """Detect objects in multiple images using a YOLO model and display the results."""
+    '''Detect objects in multiple images using a YOLO model and display the results.'''
 
     # Input and output file paths
     # example_model_path = 'models/bottle/Run7_yolo11n_512_SGD/best.pt'
@@ -75,11 +90,11 @@ def detect_and_display(model_path: str, image_paths: list):
     # Detect objects
     os.makedirs('output', exist_ok=True)
     for image_path in image_paths:
-        print(f"\nProcessing image: {image_path}")
+        print(f'\nProcessing image: {image_path}')
         result_all = detect_objects(model, image_path)
 
         # Display detailed results
-        print("Result:")
+        print('Result:')
         result = result_all[0]
         display_results(result)
 
@@ -90,12 +105,14 @@ def detect_and_display(model_path: str, image_paths: list):
         show_result_with_matplotlib(result)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 
     # Parse command-line arguments
-    parser = argparse.ArgumentParser(description="YOLO Object Detection and Result Visualization")
-    parser.add_argument("model_path", type=str, help="Path to the YOLO model file")
-    parser.add_argument("image_paths", nargs="+", help="Paths to input images")
+    parser = argparse.ArgumentParser(
+        description='YOLO Object Detection and Result Visualization')
+    parser.add_argument('model_path', type=str,
+                        help='Path to the YOLO model file')
+    parser.add_argument('image_paths', nargs='+', help='Paths to input images')
     args = parser.parse_args()
 
     # Call the detection and display function

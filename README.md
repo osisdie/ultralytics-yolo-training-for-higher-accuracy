@@ -1,10 +1,12 @@
 # Ultralytics YOLO for classification
 
 **Objectives**
-1. Take a look MVTec AD (MVTec Anomaly Detection) dataset for training and predict bottle classification.
-2. Take a look MVTec AD (MVTec Anomaly Detection) dataset for training and predict transistor classification.
-3. Develop a continuous training flow to export and import intermediate training data, instead of always from the begining steps.
-4. Trying to find the optimized hyperparameters or algorithms for high accuracy (95%+) and low cls_loss (10%-).
+
+1. **Investigate the applicability of the MVTec AD dataset for training and predicting bottle classification.**
+2. **Explore the use of the MVTec AD dataset for training and predicting transistor classification.**
+3. **Develop a continuous training workflow that enables the export and import of intermediate training data, avoiding the need to restart training from the beginning.**
+4. **Identify and optimize hyperparameters and algorithms to achieve high accuracy (95%+) while maintaining a low classification loss (10% or lower).** 
+
 
 # Pre-trained YOLO models we use
 ## YOLOv11 Model Comparison Table
@@ -18,7 +20,6 @@
 | **Accuracy (mAP)**        | Lower                      | Moderate                    | Higher                      |
 | **Target Hardware**       | Mobile/Embedded Devices    | GPUs with Limited Memory    | High-Performance GPUs       |
 
-**Explanation:**
 
 * **Input Resolution:** All three models use the same input resolution of 416x416 pixels.
 * **Parameters:** The number of parameters in the model directly affects its size and complexity. YOLOv11n.pt has the fewest parameters, making it suitable for mobile or embedded devices. YOLOv11m.pt has the most parameters, leading to higher accuracy but requiring more powerful hardware.
@@ -148,6 +149,7 @@ class_map = dict(
 - image augmented: False
 - yolo-model: yollo11n.pt
 ```
+
 
 # Manual Testing
 
