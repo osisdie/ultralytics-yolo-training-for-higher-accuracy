@@ -2,13 +2,16 @@
 
 **Objectives**
 
-1. **Investigate the applicability of the MVTec AD dataset for training and predicting bottle classification.**
-2. **Explore the use of the MVTec AD dataset for training and predicting transistor classification.**
-3. **Develop a continuous training workflow that enables the export and import of intermediate training data, avoiding the need to restart training from the beginning.**
-4. **Identify and optimize hyperparameters and algorithms to achieve high accuracy (95%+) while maintaining a low classification loss (10% or lower).** 
+1. Investigate the applicability of the MVTec AD dataset for training and predicting bottle classification.
+2. Explore the use of the MVTec AD dataset for training and predicting transistor classification.
+3. Develop a continuous training workflow that enables the export and import of intermediate training data, avoiding the need to restart training from the beginning.
+4. Identify and optimize hyperparameters and algorithms to achieve high accuracy (95%+) while maintaining a low classification loss (10% or lower).
 
+<br>
+<br>
 
 # Pre-trained YOLO models we use
+
 ## YOLOv11 Model Comparison Table
 
 | Feature                 | yolo11n.pt                 | yolo11s.pt                 | yolo11m.pt                 |
@@ -28,10 +31,12 @@
 * **Accuracy:** Mean Average Precision (mAP) is a metric used to measure object detection accuracy. YOLOv11m.pt typically achieves the highest mAP due to its increased complexity. However, the difference in accuracy might be negligible for some applications.
 * **Target Hardware:**  YOLOv11n.pt is well-suited for resource-constrained environments like mobile devices. YOLOv11s.pt offers a balance between speed and accuracy for GPUs with limited memory. YOLOv11m.pt is ideal for high-performance GPUs where maximizing accuracy is the priority.
 
+<br>
+<br>
 
 # Configurations
 
-**DEFAULT_PARAMS**
+**Default parameters**
 ```py
 DEFAULT_PARAMS = dict(
     model_names     = ["yolo11n.pt", 'yolo11s.pt', 'yolo11m.pt'],
@@ -75,41 +80,45 @@ class_map = dict(
 )
 ```
 
+<br>
+<br>
 
 # Example: model performance
 
 ## Bottle
-**confusion_matrix**
+**Confusion Matrix**
 ![](./images/bottle/bottle_confusion_matrix.png)
 
-**training_results**
+**Training Results**
 ![](./images/bottle/bottle_training_results.png)
 
-**prediction**
+**Prediction**
 ![](./images/bottle/bottle_prediction.png)
 
 
 ## Transistor
-**confusion_matrix**
+**Confusion Matrix**
 ![](./images/transistor/transistor_confusion_matrix.png)
 
-**training_results**
+**Training Results**
 ![](./images/transistor/transistor_training_results.png)
 
-**prediction**
+**Prediction**
 ![](./images/transistor/transistor_prediction.png)
 
 
 ## Rice
-**confusion_matrix**
+**Confusion Matrix**
 ![](./images/rice/rice_confusion_matrix.png)
 
-**training_results**
+**Training Results**
 ![](./images/rice/rice_training_results.png)
 
-**prediction**
+**Prediction**
 ![](./images/rice/rice_prediction.png)
 
+<br>
+<br>
 
 # Current Cross-model-parameter training results
 **metrics/mAP50**
@@ -118,6 +127,8 @@ class_map = dict(
 **val/cls_loss**
 ![](./images/yolo11_val_cls_loss_for_bottle_50_epochs_each.png)
 
+<br>
+<br>
 
 # Prediction
 
@@ -150,10 +161,12 @@ class_map = dict(
 - yolo-model: yollo11n.pt
 ```
 
+<br>
+<br>
 
-# Manual Testing
+# Manual testing
 
-**bash command example**
+**Bash command example**
 
 `Note`: please specifiy desired model path as the 1st argument and following by one or more testing image paths as  the rest arguments.
 
@@ -181,6 +194,8 @@ Saved predicted result to ./output/bottle_input.png
 **Figure**
 ![](./tests/bottle_output_figure.png)
 
+<br>
+<br>
 
 # Conclusion
 > Experiments suggest that utilizing the `YOLOv11n` model with a `512`-pixel image size and the `SGD` learning algorithm can yield improved results. Furthermore, employing image augmentation techniques such as rotation, flipping, grayscale conversion, and brightness adjustment can further enhance accuracy.
@@ -195,9 +210,21 @@ Saved predicted result to ./output/bottle_input.png
 > - Run14_yolo11s_256_SGD_Aug (0.37 val/cls_loss)
 > - Run32_yolo11m_512_SGD_Aug (0.40 val/cls_loss)"
 
+<br>
+<br>
 
 # References
+
 - [Ultralytics YOLO Docs](https://docs.ultralytics.com/)
 - [Ultralytics Github](https://github.com/ultralytics/ultralytics)
 - [MVTecAD (MVTec Anomaly Detection)](https://www.kaggle.com/datasets/thtuan/mvtecad-mvtec-anomaly-detection)
 - [Rice Image Dataset for Object Detection](https://www.kaggle.com/datasets/alikhalilit98/rice-image-dataset-for-object-detection)
+
+<br>
+<br>
+
+---
+
+**Enjoy the YOLO project, and we look forward to getting your feedback!**
+
+---
